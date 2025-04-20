@@ -1,0 +1,8 @@
+Web sitesi oluşturma 
+Login 
+veritabanı tasarımı: mesajlar , fotoğraflar , kişi , videolar
+Yapay zeka botu ekleme 
+mobile entegrasyon
+
+Login 
+web sitesi tasarımı 

@@ -1,0 +1,122 @@
+/* GENEL STIL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: orange;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* İLETİŞİM SAYFASI */
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 50px;
+  background-color: #ffedcc; /* Daha açık turuncu arka plan */
+}
+
+.contact-left, .contact-right {
+  width: 48%;
+}
+
+.contact-left h2, .contact-right h2 {
+  color: orange;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  min-height: 150px;
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #e69500;
+}
+
+.contact-right p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.contact-right a {
+  color: orange;
+  text-decoration: none;
+}
+
+.contact-right a:hover {
+  text-decoration: underline;
+}
+
+/* İLETİŞİM PARAGRAF STİLİ */
+.contact-info-paragraph {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.contact-info-paragraph a {
+  color: orange;
+  text-decoration: none;
+}
+
+.contact-info-paragraph a:hover {
+  text-decoration: underline;
+}

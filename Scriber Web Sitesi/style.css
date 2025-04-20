@@ -1,0 +1,166 @@
+/* GENEL STIL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: orange;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: white;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 250px;
+}
+
+.dropdown-content ul {
+  list-style: none;
+}
+
+.dropdown-content li {
+  margin-bottom: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* AUTH BUTTONS */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.auth-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* DOWNLOAD SECTION */
+.download-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #ffe6cc;
+}
+
+.download-box {
+  text-align: center;
+  position: relative;
+}
+
+.download-box img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+}
+
+.download-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+}
+
+.download-content h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.download-btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.download-btn:hover {
+  background-color: #e69500;
+}
+
+/* FEATURES SECTION */
+.features {
+  padding: 80px 50px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.feature-item img {
+  width: 200px;
+  height: 200px;
+  margin-right: 40px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.feature-text h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: orange;
+}
+
+.feature-text p {
+  font-size: 1.1rem;
+  max-width: 500px;
+}
