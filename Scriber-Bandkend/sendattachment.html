@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Login + Mesaj Gönder</title>
+</head>
+<body>
+  <h2>Giriş Yap</h2>
+  <form id="loginForm">
+    <label>Email:</label><br />
+    <input type="email" name="email" required><br><br>
+
+    <label>Şifre:</label><br />
+    <input type="password" name="password" required><br><br>
+
+    <button type="submit">Giriş Yap</button>
+  </form>
+
+  <hr>
+
+  <h2>Mesaj Gönder</h2>
+  <form id="messageForm" enctype="multipart/form-data">
+    <label>Chat ID:</label><br />
+    <input type="text" name="chatId" required><br><br>
+
+    <label>İçerik (text mesaj ise):</label><br />
+    <textarea name="content" rows="3" cols="30"></textarea><br><br>
+
+    <label>Mesaj Türü:</label><br />
+    <select name="messageType">
+      <option value="text">Text</option>
+      <option value="image">Image</option>
+      <option value="video">Video</option>
+      <option value="file">File</option>
+    </select><br><br>
+
+    <label>Dosya (image/video/file):</label><br />
+    <input type="file" name="files"><br><br>
+
+    <button type="submit">Mesaj Gönder</button>
+  </form>
+
+  <script>
+    const API_BASE = 'http://127.0.0.1:3000/api';
+
+    // Giriş Formu
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const email = formData.get('email');
+      const password = formData.get('password');
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+ 
+        const data = await res.json();
+      
+        if (res.ok && data.token) {
+          localStorage.setItem('token', data.token);
+          alert('Giriş başarılı!');
+        } else {
+          alert(data.message || 'Giriş başarısız');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Sunucu hatası');
+      }
+    });
+
+    // Mesaj Gönderme Formu
+    document.getElementById('messageForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        alert('Önce giriş yapmalısınız!');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/message/`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          body: formData
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          console.log(data);
+          alert('Mesaj gönderildi!');
+        } else {
+          alert(data.message || 'Mesaj gönderilemedi');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Sunucu hatası');
+      }
+    });
+  </script>
+</body>
+</html>
