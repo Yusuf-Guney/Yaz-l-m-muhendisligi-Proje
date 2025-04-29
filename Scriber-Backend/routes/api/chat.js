@@ -1,14 +1,14 @@
 const router   = require('express').Router();
-const chats = require('../models/chat');
-const users = require('../models/user');
-const messages = require('../models/message');
-const auth = require('../middlewares/auth');
-
+const chats = require('../../models/chat');
+const users = require('../../models/user');
+const messages = require('../../models/message');
+const auth = require('../../middlewares/authApi');
 
 // @route   GET 
 
-router.get('/all', auth, async (req, res) => {
+router.get('/all', async (req, res) => {
   try {
+    
     const chatsList = await chats.find({ participants: { $elemMatch: { user: req.user.id } } })
       .populate('participants.user', 'name email avatar')
       .populate('latestMessage')
@@ -28,7 +28,11 @@ router.get('/all', auth, async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-  res.render('pages/chat', { title: 'Chat App' });
+  res.render('pages/chat', { title: 'Chat App',
+    user: req.user, // kullanıcı bilgilerini gönderiyoruz
+    token: req.cookies.token, // token bilgisini gönderiyoruz
+    message: null // mesaj bilgilerini gönderiyoruz
+   });
 });
 
 
@@ -36,7 +40,7 @@ router.get('/', async (req, res) => {
 
 // @route   Post
 
-router.post('/group',auth, async (req, res) => {//burada users'a kendisini eklemiyoruz zaten tokendan ekliyor grubu kuranı
+router.post('/group', async (req, res) => {//burada users'a kendisini eklemiyoruz zaten tokendan ekliyor grubu kuranı
   const { name, users } = req.body;
   if (!name || !users || users.length < 1) {
     return res.status(400).json({ message: 'Group name and at least 2 users are required' });
@@ -64,7 +68,7 @@ router.post('/group',auth, async (req, res) => {//burada users'a kendisini eklem
   }
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   const { userId } = req.body;
   if (!userId) {
     return res.status(400).json({ message: 'userId is required' });
@@ -108,7 +112,7 @@ router.post('/', auth, async (req, res) => {
 
 // @route   PUT 
 
-router.put('/group/rename', auth, async (req, res) => {
+router.put('/group/rename',  async (req, res) => {
     const { chatId, chatName } = req.body;
     if (!chatId || !chatName) {
       return res.status(400).json({ message: 'chatId and chatName are required' });
@@ -130,7 +134,7 @@ router.put('/group/rename', auth, async (req, res) => {
     }
 });
 
-router.put('/group/add', auth, async (req, res) => {
+router.put('/group/add',  async (req, res) => {
     const { chatId, userId } = req.body;
     if (!chatId || !userId) {
       return res.status(400).json({ message: 'chatId and userId are required' });
@@ -155,7 +159,7 @@ router.put('/group/add', auth, async (req, res) => {
     }
 });
 
-router.put('/group/remove', auth, async (req, res) => {
+router.put('/group/remove', async (req, res) => {
     const { chatId, userId } = req.body;
     if (!chatId || !userId) {
       return res.status(400).json({ message: 'chatId and userId are required' });
