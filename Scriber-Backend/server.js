@@ -2,28 +2,35 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const path = require('path');
+const cookieParser = require('cookie-parser')
+const cors = require('cors');
+
+
 app.use("/static",express.static(path.join(__dirname,"public")));
 app.use(express.json());
-const cors = require('cors');
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,      
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+// Eğer HTTPS’li proxy arkasındaysan:
+
+
 const connectDB = require('./config/db');
 app.set('view engine', 'ejs');
 
-const authRouter = require('./routes/auth');
-const messageRouter = require('./routes/message');
-const userRouter = require('./routes/user');
-const chatRouter = require('./routes/chat');
-const fileRouter = require('./routes/file');
 
-app.use('/api/auth', authRouter);
-app.use('/api/message', messageRouter);
-app.use('/api/user', userRouter);
-app.use('/api/chat', chatRouter);
-app.use('/api/file', fileRouter);
+const webRouter = require('./routes/web');
+const apiRouter = require('./routes/api');
+
+
+app.use('/api', apiRouter);
+app.use('/', webRouter);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

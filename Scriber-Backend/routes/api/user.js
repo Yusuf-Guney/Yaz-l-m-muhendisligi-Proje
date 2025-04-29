@@ -1,8 +1,8 @@
 const router   = require('express').Router();
-const message = require('../models/message');
-const users = require('../models/user');
-const auth = require('../middlewares/auth');
-
+const auth = require('../../middlewares/authApi');
+const chats = require('../../models/chat');
+const users = require('../../models/user');
+const messages = require('../../models/message');
 
 
 // @route   GET
@@ -28,7 +28,6 @@ router.get('/',auth, async (req, res) => { //
         ]
       }
     : {};
-    console.log("query:",query)
   const userS = await users.find(query)
     .select('-password -verificationToken')
     .limit(20);

@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   about: {
     type: String,
     trim: true,
+    default: 'Hey there! I am using Scriber.',
   },
   isVerified: {
     type: Boolean,

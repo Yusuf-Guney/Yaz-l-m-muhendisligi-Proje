@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { uploadToS3, deleteToS3, getFilesNamefromS3, getFilefromS3, moveFilefromS3,getFileCountfromS3,getFileFromS3WithUrl } = require('../config/aws');
+const { uploadToS3, deleteToS3, getFilesNamefromS3, getFilefromS3, moveFilefromS3,getFileCountfromS3,getFileFromS3WithUrl } = require('../../config/aws');
 
 router.get('/user', async (req,res) => { //router?url=${url} şeklinde çağırılacak
   const {url} = req.query;
